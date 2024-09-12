@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav {
+  background: linear-gradient(192.05deg, #47BFDF 0%, #4A91FF 100%);
+}
+
+.mid {
+  
+
+  background: radial-gradient(77.25% 77.25% at 69.89% 22.75%, rgba(255, 255, 255, 0.7) 0%, rgba(191, 191, 191, 0.7) 100%) 
+}
