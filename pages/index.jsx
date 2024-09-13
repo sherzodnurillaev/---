@@ -10,25 +10,25 @@ const Home = () => {
   const key = process.env.NEXT_PUBLIC_API_KEY
   
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('http://api.weatherstack.com/current', {
-  //         params: {
-  //           access_key: key,
-  //           query: query
-  //         }
-  //       });
-  //       console.log(response);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://api.weatherstack.com/current', {
+          params: {
+            access_key: key,
+            query: query
+          }
+        });
+        console.log(response);
         
-  //       setData(response.data.current);
-  //     } catch (error) {
-  //       console.error('Ошибка при загрузке данных о погоде:', error);
-  //     }
-  //   };
+        setData(response.data.current);
+      } catch (error) {
+        console.error('Ошибка при загрузке данных о погоде:', error);
+      }
+    };
 
-  //   fetchData();
-  // }, [query]);
+    fetchData();
+  }, [query]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -39,9 +39,15 @@ const Home = () => {
     setQuery(inputValue);
   };
 
-  // if (data === null) {
-  //   return <p>Загрузка данных...</p>;
-  // }
+  if (data === null) {
+    return <p>Загрузка данных...</p>;
+  }
+
+  const img = data != null ? data.weather_icons : ""
+
+  console.log(img);
+  
+
 
   const getCurrentDateString = () => {
     const now = new Date();
@@ -90,7 +96,7 @@ const Home = () => {
         </div>
 
         <Image
-          src="/son.png"
+          src={img[0]}
           alt=""
           width={200}
           height={200}
@@ -101,17 +107,17 @@ const Home = () => {
           <div className="mid bg-[#30d2fb] w-[100%] h-[335px] border-[2px] rounded-[20px] ">
             <p className="text-white text-[20px] font-bold w-[200px] mx-auto mt-[17px]">{getCurrentDateString()}</p>
             <div className="">
-                <p className="text-[100px] font-bold text-white shadow-black mx-auto w-[150px]">23°</p>
+                <p className="text-[100px] font-bold text-white shadow-black mx-auto w-[150px]">{data.temperature}</p>
             </div>
             <div className="flex items-center gap-[20px] pl-[5px] justify-center">
                 <img src="/windy.png" alt="" className="w-[30px]" />
                 <div className="w-[3px] h-[30px] bg-white"></div>
-                <p className="text-white text-[20px] font-bold"> 8 km/h</p>
+                <p className="text-white text-[20px] font-bold"> {data.wind_speed                } km/h</p>
             </div>
             <div className="flex items-center gap-[20px] pr-[15px] justify-center mt-[20px]">
                 <img src="/hum.png" alt="" className="w-[30px] pr-[5px]" />
                 <div className="w-[3px] h-[30px] bg-white"></div>
-                <p className="text-white text-[20px] font-bold"> 20%</p>
+                <p className="text-white text-[20px] font-bold"> {data.humidity}%</p>
             </div>
           </div>
         </div>
