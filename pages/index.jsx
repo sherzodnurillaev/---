@@ -100,7 +100,7 @@ const Home = () => {
           alt=""
           width={200}
           height={200}
-          className="mx-auto mt-[132px]"
+          className="mx-auto mt-[50px]"
         />
 
         <div className="absolute bottom-[80px] left-[30px] right-[30px]">
